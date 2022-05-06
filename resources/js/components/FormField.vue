@@ -1,6 +1,6 @@
 <template>
-    <default-field :field="field" :full-width-content="field.fullWidth" :show-help-text="false">
-        <template slot="field" :class="{'border-danger border': hasErrors}">
+    <DefaultField :field="field" :full-width-content="field.fullWidth" :show-help-text="false">
+        <template #field :class="{'border-danger border': hasErrors}">
             <div class="attach-many-container" :class="{'border-danger border': hasErrors}">
                 <div v-if="field.showToolbar" class="flex border-b-0 border border-40 relative">
                     <div v-if="preview" class="flex justify-center items-center absolute pin z-10 bg-white">
@@ -56,7 +56,7 @@
             </div>
 
         </template>
-    </default-field>
+    </DefaultField>
 </template>
 
 <script>
