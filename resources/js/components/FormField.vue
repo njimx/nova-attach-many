@@ -1,28 +1,28 @@
 <template>
     <DefaultField :field="field" :full-width-content="field.fullWidth" :show-help-text="false">
         <template #field :class="{'border-danger border': hasErrors}">
-            <div class="attach-many-container" :class="{'border-danger border': hasErrors}">
-                <div v-if="field.showToolbar" class="flex border-b-0 border border-40 relative">
+            <div class="attach-many-container" :class="`overflow-hidden ` + {'border-danger border': hasErrors}">
+                <div v-if="field.showToolbar" class="flex border-b-0 border border-40 relative p-2">
                     <div v-if="preview" class="flex justify-center items-center absolute pin z-10 bg-white">
                         <h3>{{ __('Selected Items') }} ({{ selected.length  }})</h3>
                     </div>
-                    <div @click="selectAll" class="w-16 text-center flex justify-center items-center">
+                    <div @click="selectAll" class="px-4 text-center flex justify-center items-center">
                         <fake-checkbox :checked="selectingAll" class="cursor-pointer"></fake-checkbox>
                     </div>
-                    <div class="flex-1 flex items-center relative">
-                        <input v-model="search" type="text" :placeholder="__('Search')" class="form-control form-input form-input-bordered w-full ml-0 m-4">
-                        <span v-if="search" @click="clearSearch" class="pin-r font-sans font-bolder absolute pr-8 cursor-pointer text-black hover:text-80">x</span>
+                    <div class="flex-1 flex items-center relative ml-4">
+                        <input v-model="search" type="text" :placeholder="__('Search')" class="form-control form-input form-input-bordered w-full m-4 pl-6">
+                        <span v-if="search" @click="clearSearch" class="text-base font-bold absolute px-2 py-1 cursor-pointer text-black hover:bg-gray-100">x</span>
                     </div>
                 </div>
-                <div class="border border-40 relative overflow-auto" :style="{ height: field.height }">
+                <div class="border border-40 relative overflow-x-auto" :style="{ height: field.height }">
                     <div v-if="loading" class="flex justify-center items-center absolute pin z-50 bg-white">
                         <loader class="text-60" />
                     </div>
-                    <div v-else v-for="resource in resources" :key="resource.value" @click="toggle($event, resource.value)" class="flex py-3 cursor-pointer select-none hover:bg-30">
-                        <div class="w-16 flex justify-center items-center">
+                    <div v-else v-for="resource in resources" :key="resource.value" @click="toggle($event, resource.value)" class="flex px-2 py-4 cursor-pointer select-none hover:bg-gray-100">
+                        <div class="px-4 flex justify-center items-center">
                             <fake-checkbox :checked="selected.includes(resource.value)" />
                         </div>
-                        <div>
+                        <div class="text-base ml-4">
                             <p>{{ resource.display }}</p>
                             <p class="text-sm" v-if="field.showSubtitle && resource.subtitle">
                                 {{ resource.subtitle }}
